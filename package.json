@@ -1,0 +1,24 @@
+{
+  "name": "week.ly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "tsc && node index.js",
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^18.16.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@linear/sdk": "^3.0.0",
+    "axios": "^1.3.6",
+    "dotenv": "^16.0.3",
+    "openai": "^3.2.1"
+  }
+}
