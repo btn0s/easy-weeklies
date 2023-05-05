@@ -116,7 +116,7 @@ async function fetchCompletedIssues(): Promise<Task[]> {
       updatedAt: {
         gte: oneWeekAgo,
       },
-      state: { type: { eq: "completed" } },
+      state: { type: { in: ["completed","started"] } },
     },
   });
 
