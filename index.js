@@ -78,7 +78,7 @@ async function fetchCompletedIssues() {
             updatedAt: {
                 gte: oneWeekAgo,
             },
-            state: { type: { eq: "completed" } },
+            state: { type: { in: ["completed", "started"] } },
         },
     });
     const tasks = [];
@@ -264,20 +264,7 @@ function generateMarkdownReport(data) {
  * @returns {string} The generated HTML report.
  */
 function generateHTMLReport(data) {
-    let report = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <style>
-          body {font-family: Arial, sans-serif;}
-          h1 {font-size: 24px;margin-bottom: 12px;}
-          h2 {font-size: 18px;margin-bottom: 8px;}
-          h3 {font-size: 14px;margin-bottom: 6px;}
-          p {margin: 4px 0;}
-        </style>
-      </head>
-      <body>
-  `;
+    let report = `<!DOCTYPE html><html><head><style>body {font-family: Arial, sans-serif;}h1 {font-size: 24px;margin-bottom: 12px;}h2 {font-size: 18px;margin-bottom: 8px;}h3 {font-size: 14px;margin-bottom: 6px;}p {margin: 4px 0;}</style></head><body>`;
     // My Active Projects
     report += "<h1>My Active Projects</h1>";
     for (const project of data.projects) {
@@ -340,6 +327,7 @@ function generateHTMLReport(data) {
     console.log("Saving reports to:", reportsPath);
     // Check if the reports directory exists, if not, create it
     if (!fs.existsSync(reportsPath)) {
+        console.log("Reports directory does not exist, creating it...");
         fs.mkdirSync(reportsPath);
     }
     // Set the report file paths
